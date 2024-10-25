@@ -1,68 +1,37 @@
 /* General Styling */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f5f5f5;
 }
 
-/* Sensor Data Container */
-.sensor-data-container {
+/* Dashboard Container */
+.dashboard-container {
     text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 80%;
 }
 
-/* Box containing the sensor data */
-.sensor-data-box {
-    background-color: #ffffff;
+/* Gauge Container */
+.gauge-container {
+    background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 250px;
-    margin: 20px auto;
+    width: 200px;
+    margin: auto;
 }
 
-/* Title Styling */
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     color: #333;
-    margin-bottom: 20px;
-}
-
-/* Loading Message */
-.loading {
-    font-size: 18px;
-    color: #007bff;
-}
-
-/* Styling for the data rows */
-.data-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.data-label {
-    font-weight: bold;
-    color: #555;
-}
-
-.data-value {
-    color: #333;
-}
-
-/* Special styles for temperature and pump state */
-.data-value.temp::after {
-    content: " °C";
-}
-
-.data-value.on {
-    color: green;
-}
-
-.data-value.off {
-    color: red;
+    margin-bottom: 40px;
 }
