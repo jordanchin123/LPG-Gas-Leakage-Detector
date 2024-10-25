@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -12,12 +13,12 @@ body {
 
 /* Dashboard Container */
 .dashboard-container {
+    display: flex;
+    flex-direction: row;  /* Align gauges horizontally */
+    justify-content: center; /* Center align the gauges */
+    flex-wrap: wrap; /* Wrap if there's not enough space */
     text-align: center;
-    display: flex; /* Changed to flexbox for horizontal layout */
-    justify-content: space-around; /* Evenly space out the gauges */
-    align-items: center;
-    width: 100%; /* Take up full width */
-    flex-wrap: wrap; /* Wrap the gauges if they overflow */
+    width: 100%;
 }
 
 /* Gauge Container */
@@ -34,6 +35,7 @@ body {
 h1 {
     font-size: 28px;
     color: #333;
-    margin-bottom: 40px;
-    width: 100%; /* Ensure the title spans the full width */
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
 }
