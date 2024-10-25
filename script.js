@@ -4,7 +4,7 @@ const range = 'Sheet1!A:D'; // Adjust based on your data range
 
 // Function to fetch data from Google Sheets
 function fetchData() {
-    const url = https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey};
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 
     fetch(url)
         .then(response => response.json())
@@ -27,7 +27,7 @@ function displayLatestData(data) {
     // Get the latest row of data
     const latestRow = data[data.length - 1];
 
-    // Assuming order: Timestamp, EC Value, Temperature, Water Pump State
+    // Assuming order: Timestamp, Gas Value, Temperature, Humidity
     const timestamp = latestRow[0];
     const gasvalue = latestRow[1];
     const temperature = latestRow[2];
