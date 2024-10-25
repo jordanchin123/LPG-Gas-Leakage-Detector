@@ -13,46 +13,70 @@ function fetchData() {
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            document.getElementById('data-display').innerHTML = '<p>Error loading data.</p>';
         });
 }
 
-// Function to display the latest data
+// Create the gauge charts using Chart.js with the Gauge plugin
+const createGauge = (ctx, maxValue) => {
+    return new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [0, maxValue], // Initial value and maxValue
+                backgroundColor: ['#ff0000', '#ffff00', '#00ff00'], // Red to green gradient
+                borderWidth: 0,
+                needleValue: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                gauge: {
+                    needle: {
+                        radiusPercentage: 2,
+                        widthPercentage: 3.2,
+                        lengthPercentage: 80,
+                        color: 'rgba(0, 0, 0, 1)'
+                    },
+                    valueLabel: {
+                        display: true,
+                        formatter: Math.round,
+                        fontSize: 20
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    bottom: 20
+                }
+            }
+        }
+    });
+};
+
+// Create the gauges for Gas, Temperature, and Humidity
+const gasGauge = createGauge(document.getElementById('gasGauge').getContext('2d'), 3000);
+const tempGauge = createGauge(document.getElementById('tempGauge').getContext('2d'), 100);
+const humidityGauge = createGauge(document.getElementById('humidityGauge').getContext('2d'), 100);
+
+// Function to display the latest data in gauges
 function displayLatestData(data) {
-    if (!data || data.length === 0) {
-        document.getElementById('data-display').innerHTML = '<p>No data available.</p>';
-        return;
-    }
+    if (!data || data.length === 0) return;
 
-    // Get the latest row of data
     const latestRow = data[data.length - 1];
+    const gasValue = parseFloat(latestRow[1]);
+    const temperature = parseFloat(latestRow[2]);
+    const humidity = parseFloat(latestRow[3]);
 
-    // Assuming order: Timestamp, EC Value, Temperature, Water Pump State
-    const timestamp = latestRow[0];
-    const gasvalue = latestRow[1];
-    const temperature = latestRow[2];
-    const humidity = latestRow[3];
+    // Update the gauge values
+    gasGauge.data.datasets[0].data[0] = gasValue;
+    gasGauge.update();
 
-    const html = `
-        <div class="data-row">
-            <span class="data-label">Timestamp: </span>
-            <span class="data-value">${timestamp}</span>
-        </div>
-        <div class="data-row">
-            <span class="data-label">Gas Value: </span>
-            <span class="data-value">${gasvalue}</span>
-        </div>
-        <div class="data-row">
-            <span class="data-label">Temperature: </span>
-            <span class="data-value">${temperature}</span>
-        </div>
-        <div class="data-row">
-            <span class="data-label">Humidity: </span>
-            <span class="data-value">${humidity}</span>
-        </div>
-    `;
+    tempGauge.data.datasets[0].data[0] = temperature;
+    tempGauge.update();
 
-    document.getElementById('data-display').innerHTML = html;
+    humidityGauge.data.datasets[0].data[0] = humidity;
+    humidityGauge.update();
 }
 
 // Fetch data when the page loads
