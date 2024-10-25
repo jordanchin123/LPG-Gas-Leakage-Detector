@@ -5,34 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LPG Gas Monitoring</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Load Chart.js and the Gauge plugin -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gauge@1.0.1/dist/chartjs-plugin-gauge.min.js"></script>
 </head>
 <body>
 
-<div class="dashboard-container">
-    <h1>LPG Gas Monitoring</h1>
+    <div class="dashboard-container">
+        <h1>LPG Gas Monitoring</h1>
 
-    <!-- Gauge for Gas -->
-    <div class="gauge-container">
-        <canvas id="gasGauge"></canvas>
-        <p>Gas Value (PPM)</p>
+        <!-- Gauge for Gas -->
+        <div class="gauge-container">
+            <canvas id="gasGauge"></canvas>
+            <p>Gas Value (PPM): <span id="gasValue">-</span></p>
+            <p>Date: <span id="gasDate">-</span></p>
+        </div>
+
+        <!-- Gauge for Temperature -->
+        <div class="gauge-container">
+            <canvas id="tempGauge"></canvas>
+            <p>Temperature (°C): <span id="tempValue">-</span></p>
+            <p>Date: <span id="tempDate">-</span></p>
+        </div>
+
+        <!-- Gauge for Humidity -->
+        <div class="gauge-container">
+            <canvas id="humidityGauge"></canvas>
+            <p>Humidity (%): <span id="humidityValue">-</span></p>
+            <p>Date: <span id="humidityDate">-</span></p>
+        </div>
     </div>
 
-    <!-- Gauge for Temperature -->
-    <div class="gauge-container">
-        <canvas id="tempGauge"></canvas>
-        <p>Temperature (°C)</p>
-    </div>
-
-    <!-- Gauge for Humidity -->
-    <div class="gauge-container">
-        <canvas id="humidityGauge"></canvas>
-        <p>Humidity (%)</p>
-    </div>
-</div>
-
-<script src="script.js"></script> <!-- Link your custom JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
