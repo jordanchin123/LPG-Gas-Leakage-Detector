@@ -1,39 +1,59 @@
+const sheetId = '1hfJ7B2CTj4jeViBN6ztUorNOofsIIsVT4YTlzhpkQcg';
+const apiKey = 'AIzaSyCz9EFh9wRX-K0qb2QJJqaXJ3wz3-TNYIQ';
+const range = 'Sheet1!A:D'; // Adjust based on your data range
+
 // Function to fetch data from Google Sheets
-async function fetchDataFromGoogleSheets() {
-    const spreadsheetId = '1hfJ7B2CTj4jeViBN6ztUorNOofsIIsVT4YTlzhpkQcg';
-    const apiKey = 'AIzaSyCz9EFh9wRX-K0qb2QJJqaXJ3wz3-TNYIQ';
-    const range = 'Sheet1!A:D'; // Adjust to the range that contains your data
-    
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
-    
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.values) {
-            const gasValue = data.values[0][0];
-            const tempValue = data.values[0][1];
-            const humidityValue = data.values[0][2];
-            const currentDate = new Date().toLocaleDateString();
-            
-            document.getElementById('gasValue').innerText = gasValue;
-            document.getElementById('gasDate').innerText = currentDate;
-            
-            document.getElementById('tempValue').innerText = tempValue;
-            document.getElementById('tempDate').innerText = currentDate;
-            
-            document.getElementById('humidityValue').innerText = humidityValue;
-            document.getElementById('humidityDate').innerText = currentDate;
-        }
-    } catch (error) {
-        console.error("Error fetching data from Google Sheets:", error);
-    }
+function fetchData() {
+    const url = https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey};
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            displayLatestData(data.values);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            document.getElementById('data-display').innerHTML = '<p>Error loading data.</p>';
+        });
 }
 
-// Initialize data fetch on page load
-document.addEventListener("DOMContentLoaded", function() {
-    fetchDataFromGoogleSheets();
+// Function to display the latest data
+function displayLatestData(data) {
+    if (!data || data.length === 0) {
+        document.getElementById('data-display').innerHTML = '<p>No data available.</p>';
+        return;
+    }
 
-    // Refresh data every 10 seconds
-    setInterval(fetchDataFromGoogleSheets, 10000);
-});
+    // Get the latest row of data
+    const latestRow = data[data.length - 1];
+
+    // Assuming order: Timestamp, EC Value, Temperature, Water Pump State
+    const timestamp = latestRow[0];
+    const gasvalue = latestRow[1];
+    const temperature = latestRow[2];
+    const humidity = latestRow[3];
+
+    const html = `
+        <div class="data-row">
+            <span class="data-label">Timestamp: </span>
+            <span class="data-value">${timestamp}</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Gas Value: </span>
+            <span class="data-value">${gasvalue}</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Temperature: </span>
+            <span class="data-value">${temperature}</span>
+        </div>
+        <div class="data-row">
+            <span class="data-label">Humidity: </span>
+            <span class="data-value">${humidity}</span>
+        </div>
+    `;
+
+    document.getElementById('data-display').innerHTML = html;
+}
+
+// Fetch data when the page loads
+window.onload = fetchData;
