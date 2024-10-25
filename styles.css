@@ -13,10 +13,11 @@ body {
 /* Dashboard Container */
 .dashboard-container {
     text-align: center;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 80%;
+    display: flex; /* Changed to flexbox for horizontal layout */
+    justify-content: space-around; /* Evenly space out the gauges */
+    align-items: center;
+    width: 100%; /* Take up full width */
+    flex-wrap: wrap; /* Wrap the gauges if they overflow */
 }
 
 /* Gauge Container */
@@ -27,11 +28,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 200px;
-    margin: auto;
+    margin: 20px;
 }
 
 h1 {
     font-size: 28px;
     color: #333;
     margin-bottom: 40px;
+    width: 100%; /* Ensure the title spans the full width */
 }
