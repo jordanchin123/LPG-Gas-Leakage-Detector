@@ -3,18 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest Sensor Data</title>
+    <title>Sensor Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Load Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gauge@1.0.1/dist/chartjs-plugin-gauge.min.js"></script> <!-- Gauge plugin -->
 </head>
 <body>
 
-<div class="sensor-data-container">
+<div class="dashboard-container">
     <h1>Latest Sensor Data</h1>
-    <div id="data-display" class="sensor-data-box">
-        <p class="loading">Loading latest data...</p>
+
+    <!-- Gauge for Gas -->
+    <div class="gauge-container">
+        <canvas id="gasGauge"></canvas>
+        <p>Gas Value (PPM)</p>
+    </div>
+
+    <!-- Gauge for Temperature -->
+    <div class="gauge-container">
+        <canvas id="tempGauge"></canvas>
+        <p>Temperature (°C)</p>
+    </div>
+
+    <!-- Gauge for Humidity -->
+    <div class="gauge-container">
+        <canvas id="humidityGauge"></canvas>
+        <p>Humidity (%)</p>
     </div>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js"></script> <!-- Your custom JavaScript -->
 </body>
 </html>
+
+new css code:
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 80%;
+}
+
+/* Gauge Container */
+.gauge-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 40px;
+}
