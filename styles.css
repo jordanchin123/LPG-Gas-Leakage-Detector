@@ -2,9 +2,9 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    padding: 0;
     margin: 0;
     background-color: #f5f5f5;
 }
@@ -12,6 +12,9 @@ body {
 /* Sensor Data Container */
 .sensor-data-container {
     text-align: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 /* Box containing the sensor data */
@@ -21,48 +24,62 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 250px;
-    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px;
 }
 
 /* Title Styling */
-h1 {
+h1, h2 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 20px;
 }
 
-/* Loading Message */
-.loading {
-    font-size: 18px;
-    color: #007bff;
+/* Impact Table Styling */
+.impact-table {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    border-collapse: collapse;
+    font-size: 16px;
 }
 
-/* Styling for the data rows */
-.data-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+.impact-table th, .impact-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
 }
 
-.data-label {
+.impact-table th {
+    background-color: #f0f0f0;
     font-weight: bold;
-    color: #555;
 }
 
-.data-value {
-    color: #333;
+.impact-table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-/* Special styles for temperature and pump state */
-.data-value.temp::after {
-    content: " °C";
+/* Light green background for the 0-500 PPM range row */
+.impact-table tbody tr:first-child {
+    background-color: #d4f0d4; /* Light green color */
 }
 
-.data-value.on {
-    color: green;
-}
-
-.data-value.off {
-    color: red;
+/* Responsive Design */
+@media (max-width: 700px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1, h2 {
+        font-size: 20px;
+    }
+    
+    .sensor-data-box, .impact-table {
+        width: 100%;
+    }
+    
+    .impact-table th, .impact-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
 }
